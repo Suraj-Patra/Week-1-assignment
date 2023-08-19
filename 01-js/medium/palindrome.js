@@ -7,7 +7,21 @@
 */
 
 function isPalindrome(str) {
-  return true;
+
+  // Remove all spaces and special characters from a string :
+  str = str.replace(/[^a-zA-Z]/g, '');  // .replace(keep, replace)
+
+  // convert to lowercase :
+  str = str.toLowerCase();
+  
+  // Reverse the string :
+  let reversed_str = str.split("").reverse().join("");
+
+  return (str===reversed_str);
 }
 
+
 module.exports = isPalindrome;
+
+
+// Test Cases : All Passed
