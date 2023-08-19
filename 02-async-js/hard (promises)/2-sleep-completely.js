@@ -3,6 +3,10 @@
  * During this time the thread should not be able to do anything else.
  */
 
-function sleep (seconds) {
-
+function sleep (waitingTime) {
+    const start = Date.now();
+    while(Date.now()-start < waitingTime){}
 }
+
+sleep(3000);
+console.log("Waiting...");
