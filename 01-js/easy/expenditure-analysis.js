@@ -9,37 +9,7 @@
 */
 
 
-function calculateTotalSpentByCategory(transactions) {
-  // Selecting only the unique categories with 'set' :
-  const categories = new Set();
-  transactions.forEach(transaction => categories.add(transaction.category));
-
-  // Setting a template array with template objects :
-  const result = [];
-  categories.forEach(val => result.push(
-    {category: val, totalSpent: 0}
-  ));
-
-  // Calculating the total price based on the category :
-  transactions.forEach(transaction => {
-    for(let obj of result) {
-      if(obj.category === transaction.category) obj.totalSpent += transaction.price;
-    }
-  })
-  
-
-  return result;
-}
-
-
-
-
-module.exports = calculateTotalSpentByCategory;
-
-// Test cases : All Passed
-
-/* 
-
+/*
 const transactions = [
   {
     id: 1,
@@ -77,8 +47,72 @@ const transactions = [
     itemName: 'Jeans',
   },
 ];
+*/
 
 
+/*
+// O(n*m)
+function calculateTotalSpentByCategory1(transactions) {
+  // Selecting only the unique categories with 'set' :
+  const categories = new Set();
+  transactions.forEach(transaction => categories.add(transaction.category));
+
+  // Setting a template array with template objects :
+  const result = [];
+  categories.forEach(val => result.push(
+    {category: val, totalSpent: 0}
+  ));
+
+  // Calculating the total price based on the category :
+  transactions.forEach(transaction => {
+    for(let obj of result) {
+      if(obj.category === transaction.category) obj.totalSpent += transaction.price;
+    }
+  })
+  
+
+  return result;
+}
+*/
+
+
+// O(n)
+function calculateTotalSpentByCategory(transactions) {
+  const category_obj = {};
+
+  transactions.forEach((transaction) => {
+    if(category_obj[transaction.category])
+      category_obj[transaction.category] += transaction.price;
+    else
+      category_obj[transaction.category] = transaction.price;
+  })
+
+
+  const result = [];
+  for(let key of Object.keys(category_obj)) {
+    const obj = {
+      category: key,
+      totalSpent: category_obj[key]
+    }
+    result.push(obj);
+  }
+
+  return result;
+}
+
+// calculateTotalSpentByCategory(transactions);
+
+
+
+
+module.exports = calculateTotalSpentByCategory;
+
+// Test cases : All Passed
+
+
+
+
+/*
 expect(result).toEqual([
   { category: 'Food', totalSpent: 30 },
   { category: 'Clothing', totalSpent: 40 },
