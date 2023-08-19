@@ -17,6 +17,29 @@
   - `npm run test-calculator`
 */
 
-class Calculator {}
+class Calculator {
+  constructor() {
+    this.result = 0;
+  }
+  add(num) {this.result += num;}
+  subtract(num) {this.result -= num;}
+  multiply(num) {this.result *= num}
+  divide(num) {
+    if(!num) throw new Error("Error");
+    this.result /= num;
+  }
+  clear() {this.result = 0}
+  getResult() {return this.result}
+  calculate(str) {
+    if(!eval(str)) throw new Error("Error");
+    this.result = eval(str)
+  }
+}
+
+// const cal1 = new Calculator();
+// cal1.divide(0);
+// console.log(cal1.getResult());
 
 module.exports = Calculator;
+
+// Test cases : 15 Passed, 1 Failed
