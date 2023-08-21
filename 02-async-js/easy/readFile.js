@@ -6,7 +6,7 @@ function readingFile() {
     // Reading file
     fs.readFile('./3-read-from-file.md', (err, data) => {
         if(err) console.log(err);
-        else console.log(data+"");
+        else console.log(data);
     });
     
     console.log("After reading");
